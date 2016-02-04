@@ -1,0 +1,67 @@
+buildscript {
+  repositories {
+    mavenCentral()
+    jcenter()
+    maven { url "https://plugins.gradle.org/m2/" }
+  }
+  dependencies {
+    classpath 'org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.11'
+  }
+}
+
+plugins {
+  id 'org.asciidoctor.convert' version '1.5.3'
+  id 'com.github.jruby-gradle.base' version '0.1.5'
+}
+
+apply plugin: 'org.asciidoctor.convert'
+
+dependencies {
+  gems 'rubygems:asciidoctor-diagram:1.2.0'
+  // not needed -- asciidoctorj or asciidoc-pdf includes them
+  // gems 'rubygems:rouge:1.10.1'
+  // gems 'rubygems:pygments:1.10.1'
+}
+
+task copyHtmlResources(type: Copy) {
+
+  from ("src/resources") {
+    include '**'
+  }
+  into("${buildDir}/asciidoc/html5")
+}
+
+task copyPdfResources(type: Copy) {
+  from ("src/resources") {
+    include '**'
+  }
+  into("${buildDir}/asciidoc/pdf")
+}
+
+
+
+asciidoctor { 
+  
+  dependsOn copyPdfResources, copyHtmlResources, jrubyPrepareGems
+
+  backends 'html5', 'pdf'
+  sourceDir "src/asciidoc"
+  resources {
+    from ("src/resources") {
+      include '**'
+    }
+  }
+
+  attributes(
+      'source-highlighter': 'rouge',
+      'rouge-style': 'github',
+      'rouge-linenums-mode': 'inline',
+      'imagesdir': 'images',
+      'toc': 'left',
+      'icons': 'font',
+      'setanchors': 'true',
+      'idprefix': '',
+      'idseparator': '-',
+  )
+}
+

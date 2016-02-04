@@ -1,0 +1,38 @@
+= ${doctitle}
+Kirk Stork <kastork@nps.edu>
+${docdate}
+:revnumber: 1
+:linkattrs:
+:imagesdir: images
+:stylesdir: styles
+:linkcss:
+${titlepageoption}
+
+This is an example.
+
+== Introduction
+
+Purdy, huh?
+
+[NOTE]
+====
+Please take note of this
+====
+
+=== Foo
+
+First and foremost, Foo is a platform for buzzword compliant applications.
+
+[source,groovy,linenums]
+----
+class HelloSayer
+{
+  def sayHello()
+  {
+    println "Hello" //<1>
+  }
+}
+----
+<1> prints hello to STDOUT
+
+include::sections/section_1.adoc[]
