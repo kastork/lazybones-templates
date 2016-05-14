@@ -1,0 +1,19 @@
+plugins {
+  id 'base'
+}
+
+allprojects {
+  repositories {
+    jcenter()
+    mavenCentral()
+  }
+}
+
+ext {
+  vertxVersion = "${_vertxVersion}"
+  defaultGroup = "${_group}"
+  rootPackage = "${_basePackage}"
+  sourceCompatibility = '1.8'
+  targetCompatibility = '1.8'
+}
+
