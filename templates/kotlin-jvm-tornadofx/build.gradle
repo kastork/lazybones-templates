@@ -1,0 +1,44 @@
+buildscript {
+	ext.kotlin_version = "${_kotlinVersion}"
+	ext.tornadofx_version = "${_tornadofxVersion}"
+	ext.defaultGroup = "${_group}"
+	repositories {
+		mavenCentral()
+		jcenter() 
+	}
+
+	dependencies {
+		classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
+		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+	}
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: "application"
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+mainClassName = "${_basePackage}.${_mainClass}"
+
+
+repositories {
+  mavenCentral()
+  jcenter()
+}
+
+dependencies {
+    compile group: 'no.tornado', name: 'tornadofx', version:"\${tornadofx_version}"
+	compile "org.jetbrains.kotlin:kotlin-stdlib:\${kotlin_version}"
+}
+
+// Allow keeping resources like fxml and css
+// files next to their corresponding kotlin
+sourceSets {
+  main.resources.srcDirs += 'src/main/kotlin'
+}
+
+shadowJar {
+  archivesBaseName = "tornadofx-example"
+  classifier = ''
+}

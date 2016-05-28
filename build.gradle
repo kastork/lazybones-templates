@@ -29,8 +29,8 @@ lazybones {
   // These properties are required for Bintray open source hosting. Uncomment
   // and substitute in your project's license and vcsUrl:
 
-  // licenses = ["Apache-2.0"]
-  // vcsUrl = "https://github.com/yourRepoName"
+  licenses = ["BSD"]
+  vcsUrl = "https://github.com/kastork/lazybones-templates"
 
   template "rivet-project" includes "rivet-subrouter"
 }
